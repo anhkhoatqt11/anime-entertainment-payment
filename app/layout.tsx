@@ -20,7 +20,7 @@ export default function RootLayout({
   connectMongoDB();
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className}`}>
         <NextUIProvider>
           {children}
         </NextUIProvider>
