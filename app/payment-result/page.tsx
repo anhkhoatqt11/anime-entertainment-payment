@@ -12,6 +12,7 @@ const page = () => {
     const handlePaymentStatus = (status: string) => {
         if (status === '00' || (status.data && status.data.return_code === 1)) {
             setPaymentStatus('completed');
+            console.log("completed");
         } else {
             setPaymentStatus('failed');
         }
