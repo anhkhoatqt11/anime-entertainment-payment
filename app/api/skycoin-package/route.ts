@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import SkyCoinPackages from "@/models/skycoinpackages";
 
 export async function GET(request: Request) {

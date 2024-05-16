@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import PaymentHistory from "@/models/paymenthistory";
 
 export async function POST (req: Request) {

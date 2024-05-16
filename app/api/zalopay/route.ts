@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import moment from 'moment';
 import CryptoJS from 'crypto-js';
 import axios from 'axios';

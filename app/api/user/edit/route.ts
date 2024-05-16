@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 import UserModel from "@/models/users";
 
 export async function POST(request: Request) {

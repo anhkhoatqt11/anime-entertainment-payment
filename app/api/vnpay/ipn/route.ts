@@ -1,3 +1,4 @@
+export const runtime = 'edge';
 // import prisma from '@/lib/prisma';
 import PaymentHistory from "@/models/paymenthistory";
 import UserModel from "@/models/users";
