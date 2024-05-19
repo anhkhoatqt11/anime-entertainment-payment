@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { Button, Image, Input } from '@nextui-org/react';
+import { Button, Card, CardBody, CardFooter, CardHeader, Image, Input } from '@nextui-org/react';
 import { useUser } from '@/hooks/useUsers';
 import { usePayment } from '@/hooks/usePayment';
 import { useRouter } from "next/navigation";
@@ -17,6 +17,7 @@ const Page = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [packages, setPackages] = useState([]);
   const [currentDateTime, setCurrentDateTime] = useState("");
+  const [isPackageSelected, setIsPackageSelected] = useState(false); // Boolean to check if a package is selected
   const [selectedPackageIndex, setSelectedPackageIndex] = useState(null); // Index of the selected package
 
   const handleButtonClick = async () => {
@@ -78,10 +79,11 @@ const Page = () => {
     router.push(uploadPaymentSuccess.data.response.order_url);
   }
 
-  const onPurchase = async (index) => {
+  const onPurchase = async (index: number | React.SetStateAction<null>) => {
     // Logic for purchasing the packageItem goes here
     setSelectedPackageIndex(index);
     console.log('Purchased:', packages[index]);
+    setIsPackageSelected(true); // Set the boolean to true when a package is selected
   };
 
   useEffect(() => {
@@ -119,8 +121,8 @@ const Page = () => {
                 <h1 className="font-bold mb-2">1. Nhập số điện thoại của bạn</h1>
                 <a onClick={() => clearUserData()} className='cursor-pointer'>Lựa chọn tài khoản khác</a>
               </div>
-              <div className='border-dashed border-2 border-pink-400 bg-pink-100 p-4'>
-                <p className='text-pink-400'>Họ và tên:  <span className='text-black'>{userInfo.username!}</span></p>
+              <div className='border-dashed border-2 border-blue-400 bg-blue-100 p-4'>
+                <p className='text-blue-400'>Họ và tên:  <span className='text-black'>{userInfo.username!}</span></p>
                 {/* <p>ID: {userInfo.id!}</p> */}
               </div>
             </>
@@ -144,21 +146,23 @@ const Page = () => {
             <h1 className="font-bold mb-2">2. Chọn gói cần nạp</h1>
             <div className='flex flex-wrap justify-between'>
               {packages.map((packageItem, index) => (
-                <div key={index} onClick={() => onPurchase(index)} style={{ cursor: 'pointer', position: 'relative' }}>
-                  <Image src={'./skycoin.png'} width={100} height={100} />
-                  <p>{packageItem.packageName}</p>
-                  <p>Số lượng: {packageItem.quantity}</p>
-                  <p>Giá tiền: {packageItem.price}đ</p>
-                  {selectedPackageIndex === index && (
-                    <RiCheckboxCircleFill className="text-blue-500 absolute top-0 right-0 mt-1 mr-1" size={24} />
-                  )} {/* Display blue check icon if the item is chosen */}
-                </div>
+                <Card key={index} onClick={() => onPurchase(index)} style={{ cursor: 'pointer', position: 'relative' }}>
+                  <CardHeader>{packageItem.packageName}</CardHeader>
+                  <CardBody>
+                    <Image src={'./skycoin.png'} width={100} height={100} />
+                    <p>Số lượng: {packageItem.quantity}</p>
+                    <p>Giá tiền: {packageItem.price}đ</p>
+                    {selectedPackageIndex === index && (
+                      <RiCheckboxCircleFill className="text-blue-500 absolute top-0 right-0 mt-1 mr-1" size={24} />
+                    )} {/* Display blue check icon if the item is chosen */}
+                  </CardBody>
+                </Card>
               ))}
             </div>
           </div>
         ) : null}
 
-        {selectedPackageIndex ? (
+        {isPackageSelected ? (
           <div className="w-full max-w-screen-md bg-white rounded-md shadow-sm p-14">
             <h1 className="font-bold mb-2">3. Chọn phương thức thanh toán</h1>
             <Button onClick={onPaymentVNPay}>
