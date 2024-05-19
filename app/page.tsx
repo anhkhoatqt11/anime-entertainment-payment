@@ -7,7 +7,17 @@ import { usePayment } from '@/hooks/usePayment';
 import { useRouter } from "next/navigation";
 import Header from './(components)/Header';
 import { RiCheckboxCircleFill } from 'react-icons/ri'; // Importing the blue check icon
-import connectMongoDB from './lib/mongodb';
+
+
+const CURRENCY_FORMAT = new Intl.NumberFormat(undefined, {
+  currency: "VND",
+  style: "currency",
+});
+
+
+export function formatCurrency(value: number) {
+  return CURRENCY_FORMAT.format(value);
+}
 
 const Page = () => {
   const { fetchUsersInfoByPhoneNumber } = useUser();
@@ -30,6 +40,7 @@ const Page = () => {
       console.error('Error fetching user information:', error);
     }
   };
+
 
   const onPaymentVNPay = async () => {
     const selectedPackage = packages[selectedPackageIndex];
@@ -130,34 +141,45 @@ const Page = () => {
           ) : (
             <>
               <h1 className="font-bold mb-2">1. Nhập số điện thoại của bạn</h1>
-              <Input
-                type="number"
-                label="Số điện thoại"
-                placeholder="Nhập số điện thoại của bạn"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-              <Button className='w-full mt-4' onClick={handleButtonClick}>Xác nhận</Button>
+              <div className='flex flex-row'>
+                <Input
+                  className='w-full'
+                  type="number"
+                  label="Số điện thoại"
+                  placeholder="Nhập số điện thoại của bạn"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+              </div>
+              <Button className='w-full mt-4 bg-blue-400 text-white font-bold' onClick={handleButtonClick}>Xác nhận</Button>
             </>
           )}
         </div>
 
         {userInfo ? (
-          <div className="w-full max-w-screen-md bg-white rounded-md shadow-sm p-14 mb-8">
-            <h1 className="font-bold mb-2">2. Chọn gói cần nạp</h1>
-            <div className='flex flex-wrap justify-between'>
+          <div className="w-full max-w-screen-md bg-white rounded-md shadow-sm p-6 md:p-14 mb-8">
+            <h1 className="text-xl font-bold mb-4">2. Chọn gói cần nạp</h1>
+            <div className='flex flex-wrap -mx-4'>
               {packages.map((packageItem, index) => (
-                <Card key={index} onClick={() => onPurchase(index)} isPressable>
-                  <CardHeader>{packageItem.packageName}</CardHeader>
-                  <CardBody>
-                    <Image src={'./skycoin.png'} width={100} height={100} />
-                    <p>Số lượng: {packageItem.quantity}</p>
-                    <p>Giá tiền: {packageItem.price}đ</p>
-                    {selectedPackageIndex === index && (
-                      <RiCheckboxCircleFill className="text-blue-500 absolute top-0 right-0 mt-1 mr-1" size={24} />
-                    )} {/* Display blue check icon if the item is chosen */}
-                  </CardBody>
-                </Card>
+                <div
+                  key={index}
+                  className={`w-full sm:w-1/2 md:w-1/3 px-4 mb-4 cursor-pointer ${selectedPackageIndex === index ? 'ring-2 ring-blue-500' : 'hover:ring-1 hover:ring-gray-300'}`}
+                  onClick={() => onPurchase(index)}
+                >
+                  <div className="relative bg-gray-100 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-lg font-semibold">{packageItem.packageName}</h2>
+                      {selectedPackageIndex === index && (
+                        <RiCheckboxCircleFill className="text-blue-500" size={24} />
+                      )}
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <Image src={'/skycoin.png'} width={100} height={100} alt="Skycoin" />
+                      <p className="mt-2">Số lượng: {packageItem.quantity}</p>
+                      <p>Giá tiền: {formatCurrency(packageItem.price)}</p>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -166,12 +188,16 @@ const Page = () => {
         {isPackageSelected ? (
           <div className="w-full max-w-screen-md bg-white rounded-md shadow-sm p-14">
             <h1 className="font-bold mb-2">3. Chọn phương thức thanh toán</h1>
-            <Button onClick={onPaymentVNPay}>
-              VNPay
-            </Button>
-            <Button onClick={onPaymentZaloPay}>
-              ZaloPay
-            </Button>
+            <p className='font-medium mb-2'>Bạn sẽ được điều hướng đến trang thanh toán của đối tác cung cấp dịch vụ.</p>
+            <div className='flex flex-row row-span-2 gap-3'>
+              <Button onClick={onPaymentVNPay} className='bg-blue-400 text-white'>
+                VNPay
+              </Button>
+              <Button onClick={onPaymentZaloPay} className='bg-orange-400 text-white'>
+                ZaloPay
+              </Button>
+            </div>
+
           </div>
         ) : null}
 
