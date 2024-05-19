@@ -7,8 +7,10 @@ import { usePayment } from '@/hooks/usePayment';
 import { useRouter } from "next/navigation";
 import Header from './(components)/Header';
 import { RiCheckboxCircleFill } from 'react-icons/ri'; // Importing the blue check icon
+import connectMongoDB from './lib/mongodb';
 
 const Page = () => {
+  connectMongoDB();
   const { fetchUsersInfoByPhoneNumber } = useUser();
   const { uploadVNPAYPaymentInfo, uploadZaloPaymentInfo, getSkyCoinPackage, createPaymentHistory } = usePayment();
   const [isLoading, setisLoading] = useState(true);
