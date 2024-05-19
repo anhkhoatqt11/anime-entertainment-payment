@@ -6,7 +6,6 @@ import { useUser } from '@/hooks/useUsers';
 import { usePayment } from '@/hooks/usePayment';
 import { useRouter } from "next/navigation";
 import Header from './(components)/Header';
-import { RiCheckboxCircleFill } from 'react-icons/ri'; // Importing the blue check icon
 
 
 const CURRENCY_FORMAT = new Intl.NumberFormat(undefined, {
