@@ -1,5 +1,5 @@
 import UserModel from "@/models/users";
-import SkyCoinPackages from "@/models/skycoinpackages";
+import connectMongoDB from "@/app/lib/mongodb";
 
 export async function GET(request: Request) {
     try {
