@@ -120,7 +120,7 @@ const Page = () => {
     setPhoneNumber('');
     setUserInfo(null);
     setSelectedPackageIndex(null);
-    isPackageSelected(false);
+    setIsPackageSelected(false);
   }
 
   return (
