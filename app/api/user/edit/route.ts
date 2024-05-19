@@ -1,8 +1,10 @@
 import UserModel from "@/models/users";
+import connectMongoDB from "@/app/lib/mongodb";
 
 export async function POST(request: Request) {
 
     try {
+        connectMongoDB();
 
         const body = await request.json();
 

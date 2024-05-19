@@ -1,6 +1,8 @@
 import UserModel from "@/models/users";
+import connectMongoDB from "@/app/lib/mongodb";
 
 export async function GET(request: Request) {
+    connectMongoDB();
     const url = new URL(request.url);
     const searchParams = new URLSearchParams(url.search);
     const phoneNumber = searchParams?.get("phone");
