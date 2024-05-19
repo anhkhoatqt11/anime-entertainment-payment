@@ -163,15 +163,15 @@ const Page = () => {
               {packages.map((packageItem, index) => (
                 <div
                   key={index}
-                  className={`w-full sm:w-1/2 md:w-1/3 px-4 mb-4 cursor-pointer ${selectedPackageIndex === index ? 'ring-2 ring-blue-500' : 'hover:ring-1 hover:ring-gray-300'}`}
+                  className={`w-full sm:w-1/2 md:w-1/3 px-4 p-4 mb-4 cursor-pointer ${selectedPackageIndex === index ? 'ring-2 ring-blue-500' : 'hover:ring-1 hover:ring-gray-300'}`}
                   onClick={() => onPurchase(index)}
                 >
                   <div className="relative bg-gray-100 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
                     <div className="flex items-center justify-between mb-2">
                       <h2 className="text-lg font-semibold">{packageItem.packageName}</h2>
-                      {selectedPackageIndex === index && (
+                      {/* {selectedPackageIndex === index && (
                         <RiCheckboxCircleFill className="text-blue-500" size={24} />
-                      )}
+                      )} */}
                     </div>
                     <div className="flex flex-col items-center">
                       <Image src={'/skycoin.png'} width={100} height={100} alt="Skycoin" />
