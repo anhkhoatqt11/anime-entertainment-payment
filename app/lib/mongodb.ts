@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectMongoDB = async () => {
     try {
-        await mongoose.connect("mongodb+srv://vercel-admin-user-66496e8989a854548d95277f:q6CmpS9gm72avq97@uitproject.gsgrbdl.mongodb.net/anime_comic?retryWrites=true&w=majority");
+        await mongoose.connect(process.env.MONGODB_URI);
         console.log("MongoDB connected");
     } catch (error) {
         console.log(error);
@@ -10,5 +10,3 @@ const connectMongoDB = async () => {
 };
 
 export default connectMongoDB;
-
-
