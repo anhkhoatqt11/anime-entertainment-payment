@@ -1,7 +1,9 @@
 import UserModel from "@/models/users";
+import SkyCoinPackages from "@/models/skycoinpackages";
 
 export async function GET(request: Request) {
     try {
+        connectMongoDB();
         // Fetch all users
         const users = await UserModel.find().select("username _id");
 
