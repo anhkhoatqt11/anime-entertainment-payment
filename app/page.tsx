@@ -146,7 +146,7 @@ const Page = () => {
             <h1 className="font-bold mb-2">2. Chọn gói cần nạp</h1>
             <div className='flex flex-wrap justify-between'>
               {packages.map((packageItem, index) => (
-                <Card key={index} onClick={() => onPurchase(index)} style={{ cursor: 'pointer', position: 'relative' }}>
+                <Card key={index} onClick={() => onPurchase(index)} isPressable>
                   <CardHeader>{packageItem.packageName}</CardHeader>
                   <CardBody>
                     <Image src={'./skycoin.png'} width={100} height={100} />
