@@ -10,7 +10,6 @@ import { RiCheckboxCircleFill } from 'react-icons/ri'; // Importing the blue che
 import connectMongoDB from './lib/mongodb';
 
 const Page = () => {
-  connectMongoDB();
   const { fetchUsersInfoByPhoneNumber } = useUser();
   const { uploadVNPAYPaymentInfo, uploadZaloPaymentInfo, getSkyCoinPackage, createPaymentHistory } = usePayment();
   const [isLoading, setisLoading] = useState(true);
