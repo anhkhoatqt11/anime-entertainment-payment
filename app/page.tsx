@@ -137,13 +137,15 @@ const Page = () => {
       <Header />
       <div className="w-full h-full flex flex-col items-center justify-center mb-8">
         <img className="h-auto w-full" src="./welcomebanner2.png" alt="" />
-        <div className="w-full max-w-screen-md bg-white rounded-lg shadow-lg md:-mt-10 p-14 mb-8">
+        <div className="w-full max-w-screen-md bg-white rounded-lg shadow-lg md:-mt-10 p-10 mb-8">
           {userInfo ? (
             <>
-              <div className="flex flex-row justify-between">
-                <div className="flex flex-row gap-1 mb-3">
-                  <h1 className="font-semibold text-fuchsia-500">1.</h1>
-                  <h1 className="font-semibold">Nhập số điện thoại của bạn</h1>
+              <div className="flex flex-row flex-wrap gap-1 justify-between items-center mb-3">
+                <div className="flex flex-row gap-1">
+                  <h1 className="font-semibold">
+                    <span className="font-semibold text-fuchsia-500">1. </span>
+                    Nhập số điện thoại của bạn
+                  </h1>
                 </div>
                 <a
                   onClick={() => clearUserData()}
@@ -171,8 +173,10 @@ const Page = () => {
           ) : (
             <>
               <div className="flex flex-row gap-1 mb-3">
-                <h1 className="font-semibold text-fuchsia-500">1.</h1>
-                <h1 className="font-semibold">Nhập số điện thoại của bạn</h1>
+                <h1 className="font-semibold">
+                  <span className="font-semibold text-fuchsia-500">1. </span>
+                  Nhập số điện thoại của bạn
+                </h1>
               </div>
               <div className="flex flex-col">
                 <Input
@@ -186,17 +190,17 @@ const Page = () => {
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
                 <div className="flex flex-row gap-1">
-                  <p className="text-[12px] font-semibold text-gray-800">
-                    Lưu ý:
-                  </p>
                   <p className="text-[12px] text-gray-600">
+                    <span className="text-[12px] font-semibold text-gray-800">
+                      Lưu ý:{" "}
+                    </span>
                     Nhập số điện thoại đã đăng ký tài khoản skylark
                   </p>
                 </div>
               </div>
               <div className="w-full flex justify-center">
                 <Button
-                  className="w-1/2 h-[40px] rounded-md mt-4 bg-blue-400 text-white font-bold"
+                  className="w-full sm:w-1/2 h-[40px] rounded-md mt-4 bg-blue-400 text-white font-bold"
                   onClick={handleButtonClick}
                 >
                   Xác nhận
@@ -209,8 +213,10 @@ const Page = () => {
         {userInfo ? (
           <div className="w-full max-w-screen-md bg-white rounded-lg shadow-lg p-6 md:p-14 mb-8">
             <div className="flex flex-row gap-1 mb-3">
-              <h1 className="font-semibold text-fuchsia-500">2.</h1>
-              <h1 className="font-semibold">Chọn gói nạp skycoin</h1>
+              <h1 className="font-semibold">
+                <span className="font-semibold text-fuchsia-500">2. </span>Chọn
+                gói nạp skycoin
+              </h1>
             </div>
             <div className="flex flex-wrap -mx-4">
               {packages.map((packageItem, index) => (
@@ -223,7 +229,7 @@ const Page = () => {
                   }`}
                   onClick={() => onPurchase(index)}
                 >
-                  <div className="relative bg-slate-50 p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+                  <div className="h-full relative bg-slate-50 p-3 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
                     <div className="flex flex-col items-center">
                       <Image
                         src={"/coinpackage.png"}
@@ -231,7 +237,7 @@ const Page = () => {
                         height={100}
                         alt="Skycoin"
                       />
-                      <p className="mt-2 font-medium text-gray-600 text-[12px] sm:text-[13px] md:text-[10px]">
+                      <p className="mt-2 font-medium text-gray-600 text-[12px] sm:text-[13px] md:text-[10px] text-center">
                         {packageItem.packageName}
                       </p>
                       <p className="font-semibold text-black text-[16px] sm:text-[16px] md:text-[14px]">
@@ -248,8 +254,10 @@ const Page = () => {
         {isPackageSelected ? (
           <div className="w-full max-w-screen-md bg-white rounded-lg shadow-lg p-14">
             <div className="flex flex-row gap-1 mb-1">
-              <h1 className="font-semibold text-fuchsia-500">3.</h1>
-              <h1 className="font-semibold">Chọn hình thức thanh toán</h1>
+              <h1 className="font-semibold">
+                <span className="font-semibold text-fuchsia-500">3. </span>Chọn
+                hình thức thanh toán
+              </h1>
             </div>
             <div className="flex flex-row gap-1 mb-4">
               <p className="text-[12px] text-gray-600">
