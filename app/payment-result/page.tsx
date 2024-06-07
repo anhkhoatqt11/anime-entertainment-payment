@@ -37,14 +37,6 @@ const page = () => {
     <div className="w-full h-full bg-slate-50">
       <Header />
       <div className="w-full h-full min-h-screen flex flex-col items-center justify-center">
-        <div className="w-full max-w-screen-md bg-white rounded-md shadow-sm p-8 mb-14">
-          {paymentStatus === "completed" && (
-            <h1 className="text-2xl font-bold">Thanh toán thành công</h1>
-          )}
-          {paymentStatus === "failed" && (
-            <h1 className="text-2xl font-bold">Thanh toán thất bại</h1>
-          )}
-        </div>
         <div className="w-full h-full flex flex-col items-center justify-center mb-8">
           <img className="h-auto w-full" src="/welcomebanner2.png" alt="" />
           <div className="w-full max-w-screen-md bg-white rounded-lg shadow-lg md:-mt-20 p-4 mb-8">
@@ -58,9 +50,14 @@ const page = () => {
               </div>
               <CardBody className="p-4">
                 {paymentStatus === "completed" ? (
-                  <p className="text-center text-emerald-500 font-medium">
-                    Bạn đã thanh toán thành công dịch vụ Quảng cáo trên Skylark
-                  </p>
+                  <div className="flex flex-col gap-2 justify-center items-center">
+                    <p className="text-center text-emerald-500 font-medium">
+                      Bạn đã thanh toán thành công dịch vụ nạp Skycoin
+                    </p>
+                    <p className="text-center text-sm text-gray-600">
+                      Cảm ơn bạn đã chọn Skylark
+                    </p>
+                  </div>
                 ) : (
                   <p className="text-center text-red-500 font-medium">
                     Đã xảy ra lỗi trong quá trình thanh toán.
