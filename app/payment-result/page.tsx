@@ -36,7 +36,7 @@ const page = () => {
   return (
     <div className="w-full h-full bg-slate-50">
       <Header />
-      <div className="w-full h-full min-h-screen flex flex-col items-center justify-center">
+      <div className="w-full h-full min-h-screen flex flex-col">
         <div className="w-full h-full flex flex-col items-center justify-center mb-8">
           <img className="h-auto w-full" src="/welcomebanner2.png" alt="" />
           <div className="w-full max-w-screen-md bg-white rounded-lg shadow-lg md:-mt-20 p-4 mb-8">
@@ -45,22 +45,29 @@ const page = () => {
                 <p className="font-semibold text-2xl text-center ">
                   {paymentStatus === "completed"
                     ? "Thanh toán thành công"
-                    : "Thanh toán thất bại"}
+                    : paymentStatus === "failed"
+                    ? "Thanh toán thất bại"
+                    : "Đang xử lý"}
                 </p>
               </div>
               <CardBody className="p-4">
                 {paymentStatus === "completed" ? (
                   <div className="flex flex-col gap-2 justify-center items-center">
-                    <p className="text-center text-emerald-500 font-medium">
+                    <p className="text-center text-emerald-500 text-lg font-semibold">
                       Bạn đã thanh toán thành công dịch vụ nạp Skycoin
                     </p>
                     <p className="text-center text-sm text-gray-600">
-                      Cảm ơn bạn đã chọn Skylark
+                      Các bạn vui lòng khởi động lại ứng dụng để cập nhật lại ví
+                      Skycoin.
                     </p>
                   </div>
-                ) : (
-                  <p className="text-center text-red-500 font-medium">
+                ) : paymentStatus === "failed" ? (
+                  <p className="text-center text-red-500 text-lg font-semibold">
                     Đã xảy ra lỗi trong quá trình thanh toán.
+                  </p>
+                ) : (
+                  <p className="text-center text-blue-500 text-lg font-semibold">
+                    ... Đang xử lý ...
                   </p>
                 )}
               </CardBody>
