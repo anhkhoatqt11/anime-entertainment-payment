@@ -108,11 +108,11 @@ const Page = () => {
   };
 
   useEffect(() => {
-    fetch("https://worldtimeapi.org/api/timezone/Asia/Bangkok")
-      .then((response) => response.json())
-      .then((data) => {
-        setCurrentDateTime(data.utc_datetime);
-      });
+    const interval = setInterval(() => {
+      const now = new Date();
+      setCurrentDateTime(now.toISOString());
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
