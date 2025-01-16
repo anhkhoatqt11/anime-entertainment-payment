@@ -2,9 +2,11 @@
 import PaymentHistory from "@/models/paymenthistory";
 import UserModel from "@/models/users";
 import SkyCoinPackage from "@/models/skycoinpackages";
+import connectMongoDB from "@/app/lib/mongodb";
 
 export async function GET(req: Request) {
     try {
+        connectMongoDB();
         const url = new URL(req.url);
         const searchParams = new URLSearchParams(url.search);
         let secureHash = searchParams.get('vnp_SecureHash');
